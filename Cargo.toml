@@ -1,0 +1,8 @@
+[package]
+name = "primenear"
+version = "0.1.0"
+authors = ["Sean Macdonald <sean@crazyhorsecoding.com>"]
+edition = "2018"
+
+[dependencies]
+primes = "0.2.*"
