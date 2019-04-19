@@ -1,10 +1,16 @@
 ---
-description: Documentation on the primes binary
+description: Documentation the primes-cli, and related binaries
 ---
 
-# primes
+# About Primes Cli
+
+Primes CLI exposes a family of binaries including primes, primes-near, primes-between, primes-nth, and primes-which. It's all about the modest task of finding prime numbers in a certain range. It is simply sugar around the [primes crate](https://crates.io/crates/primes), to make it easier to invoke in a command-line context. The `primes` crate itself uses [Sieve Of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) as it's primary algorithm
 
 primes is a family of commands that can be used to find prime numbers near a specified number.
+
+## Value Proposition
+
+It is occassionally useful to have a quick way to find a prime number near a particular value. I personally like to use prime numbers in cron-jobs, systemd timers, timeout settings, cache TTLs, and anywhere where there might be a risk of [Thundering Herd Problem](https://en.wikipedia.org/wiki/Thundering_herd_problem). Aside from that, I just like prime numbers. Aside from _that_, I needed an excuse to learn [Rust](https://www.rust-lang.org/) and the [crate ecosystem](https://doc.rust-lang.org/cargo/guide/).
 
 ## Primes
 
