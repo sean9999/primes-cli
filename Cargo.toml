@@ -1,8 +1,9 @@
 [package]
-name = "primenear"
+name = "primes-cli"
 version = "0.1.0"
 authors = ["Sean Macdonald <sean@crazyhorsecoding.com>"]
 edition = "2018"
+description = "A command-line utility for finding prime numbers"
 
 [dependencies]
 primes = "0.2.*"
