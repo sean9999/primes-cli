@@ -1,22 +1,14 @@
----
-description: primes-cli is a small utility that helps you find prime numbers.
----
-
 # About Primes Cli
 
-Primes CLI exposes a family of subcommands including `primes near`, `primes between`, which are all about finding small (between 2 and 4,294,967,295) prime numbers in a certain range. It is simply sugar around the [primes crate](https://crates.io/crates/primes), to turn it into a command-line tool. The `primes` crate itself uses the [Sieve Of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) algorithm for heavy lifting.
+Primes CLI is a binary called `primes`, exposing a family of subcommands including `primes near`, `primes between`, which are all about finding small prime numbers in a certain range (0 to 18,446,744,073,709,551,615 on 64 bit machines, o to 4,294,967,295 on 32 bit). The basic mechanics leverage [Sieve Of Eratosthenes](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes) and [Prime Number Theorem](https://en.wikipedia.org/wiki/Prime_number_theorem), with optimisations to make it fast.
 
 ## Value Proposition
 
-It is occassionally useful to have a quick way to find a prime number near a particular value. I personally like to use prime numbers in cron-jobs, systemd timers, timeout settings, cache TTLs, and anywhere where there might be a risk of [Thundering Herd Problem](https://en.wikipedia.org/wiki/Thundering_herd_problem). Aside from that, I just like prime numbers. Aside from _that_, I needed an excuse to learn [Rust](https://www.rust-lang.org/) and the [crate ecosystem](https://doc.rust-lang.org/cargo/guide/).
+It is occassionally useful to have a quick way to find a prime number near a particular value. I personally like to use prime numbers in cron-jobs, systemd timers, timeout settings, cache TTLs, and anywhere where there might be a risk of [Thundering Herd Problem](https://en.wikipedia.org/wiki/Thundering_herd_problem). It was mainly built for fun. 
 
 ## Primes
 
 The command `primes` by itself does nothing useful, except produce the help screen (equivilant to `primes help`).
-
-## Primes Help
-
-`primes help` shows you the help screen. A good place to start.
 
 ## Primes Near
 
@@ -36,4 +28,19 @@ Takes two numbers \(unsigned integers\) and returns all the primes in that range
 $ primes between 17 29      # returns 17,23,29
 ```
 
+## Primes Beneath
 
+Goes all the way to the bottom, so:
+
+```bash
+$ primes beneath 25     # returns 2,3,5,7,11,13,17,19,23
+```
+
+## Primes Is
+
+Goes all the way to the bottom, so:
+
+```bash
+$ primes is 50     # returns no
+$ primes is 53     # returns yes
+```
