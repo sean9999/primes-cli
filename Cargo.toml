@@ -1,6 +1,6 @@
 [package]
-name = "primes-cli"
-version = "1.0.0"
+name = "primes_cli"
+version = "1.0.1"
 authors = ["Sean Macdonald <sean@crazyhorsecoding.com>"]
 edition = "2021"
 description = "A command-line utility for finding prime numbers"
