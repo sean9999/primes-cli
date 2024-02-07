@@ -1,104 +1,64 @@
-//! # Primes CLI
-//!
-//! `primes-cli` is a small utility that helps you find small prime numbers
+mod primes;
+mod test;
 
-extern crate clap;
-use clap::{App, AppSettings, Arg, SubCommand};
+use clap::{Parser, Subcommand};
 
-mod between;
-mod die;
-mod help;
-mod near;
+#[derive(Debug, Parser)]
+#[command(name = "primes")]
+#[command(about = "a utility for finding prime numbers", long_about = None)]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
 
-fn is_int(val: String) -> Result<(), String> {
-	let _val: u64 = val.trim().parse().expect("The value must be an integer");
-	return Ok(());
+#[derive(Debug, Subcommand)]
+enum Commands {
+    /// primes near 100 = 97 101
+    #[command(arg_required_else_help = true)]
+    Near { num: usize },
+    /// primes between 90 100 = 91 93 97
+    Between {
+        #[arg(value_name = "LOW_NUM")]
+        lownum: usize,
+        #[arg(value_name = "HIGH_NUM")]
+        highnum: usize,
+    },
+    /// primes is 100 = no
+    #[command(arg_required_else_help = true)]
+    Is { num: usize },
+    /// primes beneath 10 = [2,3,5,7]
+    Beneath { num: usize },
 }
 
 fn main() {
-	let raw_args = App::new("primes")
-		.about("a small utility that helps you find small prime numbers")
-		.version("0.0.1")
-		.author("Sean Macdonald <code_monk@fukt.ca>")
-		.after_help(
-			"Longer explanation to appear after the options when \
-			 displaying the help information from --help or -h",
-		)
-		.setting(AppSettings::SubcommandRequiredElseHelp)
-		.subcommand(
-			SubCommand::with_name("near")
-				.about("find nearest lesser and nearest greater prime")
-				.setting(AppSettings::ArgRequiredElseHelp)
-				.arg(
-					Arg::with_name("n")
-						.help("an unsigned integer")
-						.required(true)
-						.validator(is_int),
-				),
-		)
-		.subcommand(
-			SubCommand::with_name("between")
-				.about("find primes between n and m")
-				.setting(AppSettings::ArgRequiredElseHelp)
-				.arg(
-					Arg::with_name("m")
-						.help("lower bound")
-						.required(true)
-						.validator(is_int),
-				)
-				.arg(
-					Arg::with_name("n")
-						.help("upper bound")
-						.required(true)
-						.validator(is_int),
-				),
-		);
-	let matches = &raw_args.get_matches();
+    let args = Cli::parse();
 
-	enum Invocation {
-		Near(u64),
-		Between(u64, u64),
-		Help,
-		Die(String),
-	}
-
-	fn route(cmd: Invocation) {
-		match cmd {
-			Invocation::Between(m, n) => between::main(m, n),
-			Invocation::Near(n) => near::main(n),
-			Invocation::Help => help::main(),
-			Invocation::Die(msg) => die::main(msg),
-		}
-	}
-
-	let invok = match matches.subcommand_name() {
-		Some("near") => {
-			let subcommand_params = matches.subcommand_matches("near").unwrap();
-			match subcommand_params.value_of("n").unwrap().parse::<u64>() {
-				Ok(n) => Invocation::Near(n),
-				Err(_) => Invocation::Die(String::from("Unable to parse integer for 'near'")),
-			}
-		}
-		Some("between") => {
-			if let Some(submatches) = matches.subcommand_matches("between") {
-				let n: u64 = submatches.value_of("n").unwrap().parse().unwrap();
-				let m: u64 = submatches.value_of("m").unwrap().parse().unwrap();
-				Invocation::Between(m, n)
-			} else {
-				Invocation::Die(String::from("could not get submatches for 'between'"))
-			}
-		}
-		None => {
-			println!("No subcommand was used");
-			Invocation::Help
-		}
-		_ => {
-			println!("Some other subcommand was used");
-			Invocation::Help
-		}
-	};
-
-	route(invok);
-
-	//println!("{:?}", matches);
+    match args.command {
+        Commands::Near { num } => {
+            let nums = primes::near(num);
+            for num in &nums {
+                println!("{}", num);
+            }
+        }
+        Commands::Between { highnum, lownum } => {
+            let nums = primes::between(lownum, highnum);
+            for num in &nums {
+                println!("{}", num);
+            }
+        }
+        Commands::Is { num } => {
+            let is = primes::is_prime(num);
+            if is {
+                println!("yes")
+            } else {
+                println!("no")
+            }
+        }
+        Commands::Beneath { num } => {
+            let nums = primes::beneath(num);
+            for num in &nums {
+                println!("{}", num);
+            }
+        }
+    }
 }

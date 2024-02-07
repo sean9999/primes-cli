@@ -1,14 +1,20 @@
 [package]
 name = "primes-cli"
-version = "0.1.2"
+version = "1.0.0"
 authors = ["Sean Macdonald <sean@crazyhorsecoding.com>"]
-edition = "2018"
+edition = "2021"
 description = "A command-line utility for finding prime numbers"
+repository = "https://github.com/sean9999/primes-cli/"
+license = "MIT OR Apache-2.0"
+keywords = ["prime", "numbers", "sieve", "eratosthenes", "cli"]
+homepage = "https://www.seanmacdonald.ca/posts/primes"
+documentation = "https://github.com/sean9999/primes-cli/wiki"
+readme = "README.md"
+categories = ["command-line-utilities", "mathematics"]
 
 [[bin]]
 name = "primes"
 path = "src/main.rs"
 
 [dependencies]
-primes = "0.2.*"
-clap = "2"
+clap = { version = "4.4.18", features = ["derive"] }
