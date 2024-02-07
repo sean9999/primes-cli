@@ -38,7 +38,7 @@ $ primes beneath 25     # returns 2,3,5,7,11,13,17,19,23
 
 ## Primes Is
 
-Goes all the way to the bottom, so:
+Basic primality test:
 
 ```bash
 $ primes is 50     # returns no
