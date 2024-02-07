@@ -1,8 +1,8 @@
 [package]
 name = "primes-cli"
-version = "0.1.2"
+version = "1.0.0"
 authors = ["Sean Macdonald <sean@crazyhorsecoding.com>"]
-edition = "2018"
+edition = "2021"
 description = "A command-line utility for finding prime numbers"
 
 [[bin]]
@@ -10,5 +10,11 @@ name = "primes"
 path = "src/main.rs"
 
 [dependencies]
-primes = "0.2.*"
-clap = "2"
+clap = { version = "4.4.18", features = ["derive"] }
+
+[target.x86_64-unknown-linux-gnu]
+linker = "/usr/bin/clang"
+rustflags = ["-Clink-arg=-fuse-ld=lld", "-Clink-arg=-Wl,--no-rosegment"]
+
+[profile.release]
+debug = true
