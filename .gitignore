@@ -1,2 +1,4 @@
-/target
+/target/**
+!/target/criterion/
+!/target/criterion/**
 **/*.rs.bk
