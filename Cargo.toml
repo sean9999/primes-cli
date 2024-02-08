@@ -8,7 +8,7 @@ repository = "https://github.com/sean9999/primes-cli/"
 license = "MIT OR Apache-2.0"
 keywords = ["prime", "numbers", "sieve", "eratosthenes", "cli"]
 homepage = "https://www.seanmacdonald.ca/posts/primes"
-documentation = "https://github.com/sean9999/primes-cli/wiki"
+documentation = "https://crates.io/crates/codemonk-primes-cli"
 readme = "README.md"
 categories = ["command-line-utilities", "mathematics"]
 
