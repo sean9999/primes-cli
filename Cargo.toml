@@ -1,8 +1,10 @@
+ cargo-features = ["edition2024"]
+
 [package]
 name = "codemonk-primes-cli"
 version = "1.0.4"
 authors = ["Sean Macdonald <sean@crazyhorsecoding.com>"]
-edition = "2021"
+edition = "2024"
 description = "A command-line utility for finding prime numbers"
 repository = "https://github.com/sean9999/primes-cli/"
 license = "MIT OR Apache-2.0"
