@@ -1,4 +1,4 @@
- cargo-features = ["edition2024"]
+cargo-features = ["edition2024"]
 
 [package]
 name = "codemonk-primes-cli"
@@ -14,9 +14,24 @@ documentation = "https://crates.io/crates/codemonk-primes-cli"
 readme = "README.md"
 categories = ["command-line-utilities", "mathematics"]
 
+[lib]
+name = "primes"
+#crate-type = ["cdylib", "rlib"]
+
 [[bin]]
 name = "primes"
 path = "src/main.rs"
 
 [dependencies]
+bencher = "0.1.5"
 clap = { version = "4.4.18", features = ["derive"] }
+
+[dev-dependencies]
+criterion = { version = "0.4", features = ["html_reports"] }
+
+[[bench]]
+name = "example"
+harness = false
+
+[toolchain]
+channel = "nightly"

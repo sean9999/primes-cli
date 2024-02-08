@@ -1,4 +1,6 @@
-mod primes;
+#![feature(test)]
+
+//mod lib;
 mod test;
 
 use clap::{Parser, Subcommand};
