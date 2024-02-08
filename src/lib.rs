@@ -48,7 +48,7 @@ pub fn is_prime(n: usize) -> bool {
     let s = (n as f64).sqrt().ceil() as usize;
     let mut cached_primes: Vec<usize> = Vec::with_capacity(n_primes_beneath(s));
     for i in 2..=s {
-        if !is_divisible_by(i, &cached_primes) {
+        if !is_multiple_of(i, &cached_primes) {
             cached_primes.push(i);
             if n > i && n % i == 0 {
                 return false;
@@ -62,7 +62,7 @@ pub fn is_prime(n: usize) -> bool {
 pub fn beneath(upper: usize) -> Vec<usize> {
     let mut primes: Vec<usize> = Vec::with_capacity(n_primes_beneath(upper));
     for i in 2..=upper {
-        if !is_divisible_by(i, &primes) {
+        if !is_multiple_of(i, &primes) {
             primes.push(i);
         }
     }
@@ -86,7 +86,20 @@ fn n_primes_beneath(n: usize) -> usize {
 }
 
 //  is n divisible by any of the primes in arr?
-fn is_divisible_by(n: usize, arr: &Vec<usize>) -> bool {
+// fn is_divisible_by(n: usize, arr: &Vec<usize>) -> bool {
+//     if arr.len() == 0 {
+//         return false;
+//     }
+//     for m in arr {
+//         if n > *m && n % *m == 0 {
+//             return true;
+//         }
+//     }
+//     return false;
+// }
+
+//  is n a multiple of any of the primes in arr?
+fn is_multiple_of(n: usize, arr: &Vec<usize>) -> bool {
     if arr.len() == 0 {
         return false;
     }
