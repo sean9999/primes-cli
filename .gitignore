@@ -1,4 +1,7 @@
 /target/**
-!/target/criterion/
-!/target/criterion/**
 **/*.rs.bk
+*.log
+*.private
+private.*
+*.private.*
+
